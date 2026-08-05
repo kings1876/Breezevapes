@@ -55,7 +55,20 @@ for (const f of agentFiles) {
 if (!fs.existsSync(path.join(root, 'vercel.json'))) fail('Missing vercel.json at repo root — run "node scripts/gen-agent-files.mjs"')
 
 // B7 — compliance banned terms
-const BANNED_TERMS = ['quit smoking', 'smoking cessation', 'cure', 'fda approved', 'completely safe', '100% safe']
+// Note: bare "cure" is deliberately excluded — it appears in our own required
+// FDA disclaimer ("not intended to ... cure ... any disease"). Ban only
+// phrasings that would actually assert a therapeutic claim.
+const BANNED_TERMS = [
+  'quit smoking',
+  'smoking cessation',
+  'will cure',
+  'cures your',
+  'a cure for',
+  'fda approved',
+  'fda-approved',
+  'completely safe',
+  '100% safe',
+]
 function scanDir(dir, exts) {
   let hits = []
   if (!fs.existsSync(dir)) return hits

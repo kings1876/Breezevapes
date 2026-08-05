@@ -7,16 +7,19 @@ Primary keyword: **breeze vape**
 | Page | Keywords targeted |
 |---|---|
 | Homepage `/` | breeze vape, breeze vapes |
-| `/shop/disposables/` | breeze bar vape, breeze pro vape, breeze pro |
+| `/shop/breeze-pro/` | breeze pro vape, breeze pro, breeze pro flavors |
+| `/shop/breeze-prime/`, `/shop/breeze-elite/`, `/shop/breeze-mega/` | breeze pro (comparison intent), breeze vaping |
 | `/shop/` | breeze vape, breezevape |
 | `/faq/` | breeze vaping, breezevape |
 | `/blog/breeze-vape-flavors-guide/` | breeze vape flavors, breeze flavors |
-| `/blog/breeze-pro-vs-breeze-bar/` | breeze pro vape, breeze bar vape, breeze pro |
+| `/blog/breeze-pro-vs-breeze-bar/` (compares Pro/Prime/Elite) | breeze pro vape, breeze pro, breeze pro flavors |
 | `/blog/how-to-choose-your-breeze-vape/` | breezevape, breeze vaping |
 
+Note: **breeze bar vape** has no direct product-line match — "Breeze Bar" was part of an earlier placeholder
+taxonomy, not a real current Breeze Pro/Prime/Elite/Mega line name. Ranking for it now relies on the
+comparison blog post's title/anchor text rather than a dedicated product page.
+
 ## Unused / lower-priority clusters
-- **breeze pro flavors** — not yet mapped to a dedicated page. Candidate: a future "Breeze Pro Flavors" blog
-  post or a flavor-filtered view of `/shop/disposables/`.
 - **breeze vape near me** — local-intent term. Requires either a store-locator page or LocalBusiness schema
   with a real physical address, which we don't have (this is an online-only shop). Do not target until/unless
   a physical location exists — targeting it without one risks a misleading local result.

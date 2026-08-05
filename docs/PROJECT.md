@@ -47,11 +47,19 @@ No Wholesale page (client said no). No order-tracking, accounts, compare tool, o
   (PACT Act registration/reporting, state shipping restrictions, TPMPA age-verification requirements).
 
 ## Shop Structure
-Structure A: Category → Subcategory → Product.
-- Disposables → Breeze Bar, Breeze Plus, Breeze Pro Max
-- Pod Systems → Rechargeable Pods, Refillable Pods
-- E-Liquids → Nic Salts, Freebase
-- Accessories → Chargers, Cases
+Real Breeze product-line taxonomy (flat categories, no subcategories):
+- Breeze Pro — 2000 puffs, 1000mAh battery, 6mL e-liquid, 20mg nic salt, 31 flavors
+- Breeze Prime — 6000 puffs, 1500mAh battery, 10mL e-liquid, 20mg nic salt, 12 flavors
+- Breeze Elite — 4000 puffs, 1200mAh battery, 6mL e-liquid, 20mg nic salt, 12 flavors
+- Breeze Mega — up to 60,000 puffs, 850mAh rechargeable battery, 20mg nic salt, 10 flavors
+- E-Liquids — 30ml bottles, 20mg nic salt, 50VG/50PG, 10 flavors
+- Bundles — 6 multi-packs (Pro Six/Trio Pack, Elite Six Pack, Prime Trio Pack, Mega Duo/Quad Pack)
+
+81 products total. Flavor names, puff counts, battery specs, and bottle sizes are real, publicly available
+Breeze product-line facts (not copyrightable creative expression) — cross-referenced against a competitor's
+public collection pages on 2026-08-06 for accuracy, but **no images, descriptions, or marketing copy were
+copied**; all product descriptions, images, and prices on this site are original. Prices are this site's own
+figures, not matched to any competitor.
 
 ## SEO Keywords
 Primary: breeze vape. Secondary: breeze vapes, breeze vaping, breeze bar vape, breeze pro vape, breezevape,
@@ -59,10 +67,11 @@ breeze pro, breeze vape near me, breeze vape flavors, breeze pro flavors, breeze
 Full assignment in `docs/keyword-map.md`. Competitor referenced: shopbreeze.ca.
 
 ## Products
-**Placeholder catalog** (client asked for realistic placeholders since no real product list was supplied) —
-10 Breeze-branded products across all 4 categories, defined in `PRODUCTS` in `src/config/site.js`. Images are
-generated placeholder SVGs (`public/images/*.svg` — brand-gradient tile with product name). Replace both
-before a real launch.
+**Real Breeze catalog, placeholder images.** 81 products across Breeze Pro/Prime/Elite/Mega, E-Liquids, and
+Bundles, defined in `PRODUCTS` in `src/config/site.js` (see Shop Structure above for sourcing notes). Images
+are generic per-line placeholder SVGs (`public/images/breeze-{pro,prime,elite,mega,eliquids,bundles}-line.svg`
+— one shared tile per product line, not per flavor). Replace with real product photography from the actual
+Breeze distributor/manufacturer before launch — never scrape a competitor's photos.
 
 ## Forms & Email
 - Provider: web3forms (default, both targets support it, no domain verification needed)
@@ -83,9 +92,15 @@ before a real launch.
 
 ## Known gaps / follow-ups
 1. Real contact/order email + Web3Forms key needed before forms function.
-2. Real product catalog + photography needed before launch (placeholders are clearly usable but not final).
+2. Real product photography needed before launch — catalog data (names/flavors/specs/prices) is real, but
+   images are still generic per-line placeholders. Source real photos from the actual Breeze
+   distributor/manufacturer, not a competitor's site.
 3. Tawk.to widget ID needed to activate live chat.
 4. No Node.js/npm available in the build environment this session — `npm install`, `next build`, and
-   `scripts/crosscheck.mjs` were not run locally. Verify the first Vercel build succeeds and address any
+   `scripts/crosscheck.mjs` were not run locally. Verify the first Vercel build succeeds (81-product catalog
+   significantly increases build/page count vs. the original 10-product placeholder set) and address any
    compile errors that surface there.
 5. Consider legal review of vape-specific compliance copy (PACT Act, state shipping restrictions) before launch.
+6. Confirm this business is an authorized Breeze reseller — the site now presents the real Breeze product
+   line by name; if not authorized, using these exact trademarked product names/flavors carries a trademark
+   risk regardless of original imagery/copy.

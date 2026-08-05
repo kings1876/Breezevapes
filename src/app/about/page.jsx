@@ -27,15 +27,17 @@ export default function AboutPage() {
 
       <p>
         {SITE.name} is a {SITE.foundingLocation}-based vape retailer established in {SITE.foundingYear}, offering the
-        full Breeze lineup — disposable vapes, pod systems, e-liquids, and accessories — to customers {SITE.shipsTo.toLowerCase()}.
-        We built {SITE.name} around a simple idea: make it easy to find the exact Breeze product you want, order it
-        quickly, and get it shipped discreetly and reliably.
+        full Breeze lineup — Breeze Pro, Prime, Elite, and Mega disposables, plus Breeze e-liquids and bundles — to
+        customers {SITE.shipsTo.toLowerCase()}. We built {SITE.name} around a simple idea: make it easy to find the
+        exact Breeze flavor and device you want, order it quickly, and get it shipped discreetly and reliably.
       </p>
 
       <h2>What We Carry</h2>
       <p>
-        Our catalog spans {PRODUCTS.length}+ Breeze products across disposables, pod systems, and e-liquids, organized
-        by category and subcategory so you can go straight from flavor or puff count to checkout.
+        Our catalog spans {PRODUCTS.length}+ Breeze products across four disposable lines — Breeze Pro (2000 puffs),
+        Breeze Elite (4000 puffs), Breeze Prime (6000 puffs), and Breeze Mega (rechargeable, up to 60,000 puffs) —
+        plus Breeze E-Liquid bottles and multi-device bundles, organized by category so you can go straight from
+        flavor or puff count to checkout.
       </p>
 
       <h2>How We Ship</h2>

@@ -8,7 +8,7 @@ export const SITE = {
   domain: 'www.breezevapes.net',
   url: 'https://www.breezevapes.net',
   description:
-    'Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.',
+    'Breeze Vapes is a USA-based online vape shop offering the full Breeze Pro, Prime, Elite, and Mega disposable lineup plus Breeze e-liquids and multi-packs, nationwide, with crypto payment and fast, discreet shipping.',
   locale: 'en',
   target: 'vercel',
   currency: 'USD',
@@ -55,167 +55,182 @@ export const CHAT = {
 
 export const CATEGORIES = [
   {
-    slug: 'disposables',
-    name: 'Disposables',
-    description: 'Single-use Breeze disposable vapes in a wide range of puff counts and flavors.',
-    subcategories: [
-      { slug: 'breeze-bar', name: 'Breeze Bar' },
-      { slug: 'breeze-plus', name: 'Breeze Plus' },
-      { slug: 'breeze-pro-max', name: 'Breeze Pro Max' },
-    ],
+    slug: 'breeze-pro',
+    name: 'Breeze Pro',
+    description: 'Breeze Pro disposable vapes — 2000 puffs, 1000mAh battery, 6mL pre-filled e-liquid, 20mg nicotine salt.',
+    subcategories: [],
   },
   {
-    slug: 'pod-systems',
-    name: 'Pod Systems',
-    description: 'Rechargeable and refillable Breeze pod systems for everyday vaping.',
-    subcategories: [
-      { slug: 'rechargeable-pods', name: 'Rechargeable Pods' },
-      { slug: 'refillable-pods', name: 'Refillable Pods' },
-    ],
+    slug: 'breeze-prime',
+    name: 'Breeze Prime',
+    description: 'Breeze Prime disposable vapes — 6000 puffs, 1500mAh battery, 10mL pre-filled e-liquid, 20mg nicotine salt.',
+    subcategories: [],
+  },
+  {
+    slug: 'breeze-elite',
+    name: 'Breeze Elite',
+    description: 'Breeze Elite disposable vapes — 4000 puffs, 1200mAh battery, 6mL pre-filled e-liquid, 20mg nicotine salt.',
+    subcategories: [],
+  },
+  {
+    slug: 'breeze-mega',
+    name: 'Breeze Mega',
+    description: 'Breeze Mega rechargeable disposables — up to 60,000 puffs, 850mAh rechargeable battery, 20mg nicotine salt.',
+    subcategories: [],
   },
   {
     slug: 'e-liquids',
     name: 'E-Liquids',
-    description: 'Nic salt and freebase e-liquids in Breeze signature flavors.',
-    subcategories: [
-      { slug: 'nic-salts', name: 'Nic Salts' },
-      { slug: 'freebase', name: 'Freebase' },
-    ],
+    description: 'Breeze nicotine salt e-liquids — 30ml bottles, 20mg, 50VG/50PG blend.',
+    subcategories: [],
   },
   {
-    slug: 'accessories',
-    name: 'Accessories',
-    description: 'Chargers, cases, and everyday essentials for your Breeze device.',
-    subcategories: [
-      { slug: 'chargers', name: 'Chargers' },
-      { slug: 'cases', name: 'Cases' },
-    ],
+    slug: 'bundles',
+    name: 'Bundles',
+    description: 'Multi-packs across the Breeze Pro, Prime, Elite, and Mega lineup at a bundle price.',
+    subcategories: [],
   },
 ]
 
-// PLACEHOLDER CATALOG — realistic Breeze-branded products so the site has a
-// working shop from day one. Swap in real names/prices/images before launch.
-export const PRODUCTS = [
-  {
-    slug: 'breeze-pro-6000-blue-razz-ice',
-    name: 'Breeze Pro 6000 — Blue Razz Ice',
-    price: 24.99,
-    category: 'disposables',
-    subcategory: 'breeze-pro-max',
-    short: 'A bold blue raspberry disposable with a cooling menthol finish, 6000 puffs.',
-    description:
-      'Breeze Pro 6000 in Blue Razz Ice pairs a bold blue raspberry profile with a cooling menthol finish for an all-day vape. Rechargeable battery and a large e-liquid capacity are built for extended sessions without needing a refill.',
-    badge: 'Best Value',
-    images: ['breeze-pro-6000-blue-razz-ice.svg'],
-  },
-  {
-    slug: 'breeze-plus-800-watermelon-ice',
-    name: 'Breeze Plus 800 — Watermelon Ice',
-    price: 16.99,
-    category: 'disposables',
-    subcategory: 'breeze-plus',
-    short: 'Juicy watermelon with an icy menthol edge in a compact 800-puff device.',
-    description:
-      'Breeze Plus 800 delivers juicy watermelon with an icy menthol edge in a slim, pocket-friendly device. Draw-activated with no buttons, it is built for grab-and-go convenience.',
-    badge: 'Popular',
-    images: ['breeze-plus-800-watermelon-ice.svg'],
-  },
-  {
-    slug: 'breeze-bar-2000-mango',
-    name: 'Breeze Bar 2000 — Mango',
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .replace(/[()]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+// Real Breeze product-line specs and flavor names (factual data only — puff
+// counts, battery specs, bottle sizes, and flavor names are not creative
+// expression). Descriptions, images, and prices below are original to this
+// site, not copied from any retailer.
+const LINE_SPECS = {
+  'breeze-pro': {
+    label: 'Breeze Pro',
+    puffs: '2000 puffs',
+    battery: '1000mAh internal battery',
+    eliquid: '6mL pre-filled e-liquid',
+    nicotine: '20mg nicotine salt',
     price: 19.99,
-    category: 'disposables',
-    subcategory: 'breeze-bar',
-    short: 'Ripe mango flavor in the original Breeze Bar, 2000 puffs.',
-    description:
-      'The original Breeze Bar in Mango delivers a smooth, ripe tropical flavor across 2000 puffs. A balanced mid-size option between the compact Plus and the extended Pro Max lines.',
-    badge: 'New',
-    images: ['breeze-bar-2000-mango.svg'],
+    image: 'breeze-pro-line.svg',
   },
-  {
-    slug: 'breeze-pro-max-10000-strawberry-kiwi',
-    name: 'Breeze Pro Max 10000 — Strawberry Kiwi',
+  'breeze-prime': {
+    label: 'Breeze Prime',
+    puffs: '6000 puffs',
+    battery: '1500mAh internal battery',
+    eliquid: '10mL pre-filled e-liquid',
+    nicotine: '20mg nicotine salt',
+    price: 26.99,
+    image: 'breeze-prime-line.svg',
+  },
+  'breeze-elite': {
+    label: 'Breeze Elite',
+    puffs: '4000 puffs',
+    battery: '1200mAh internal battery',
+    eliquid: '6mL pre-filled e-liquid',
+    nicotine: '20mg nicotine salt',
+    price: 24.99,
+    image: 'breeze-elite-line.svg',
+  },
+  'breeze-mega': {
+    label: 'Breeze Mega',
+    puffs: 'up to 60,000 puffs',
+    battery: '850mAh rechargeable battery',
+    eliquid: 'high-capacity pre-filled e-liquid',
+    nicotine: '20mg nicotine salt',
     price: 29.99,
-    category: 'disposables',
-    subcategory: 'breeze-pro-max',
-    short: 'The longest-lasting Breeze disposable, strawberry kiwi in every puff, up to 10000 puffs.',
-    description:
-      'Breeze Pro Max 10000 combines a sweet strawberry kiwi blend with the largest capacity in the Breeze disposable lineup. A rechargeable battery and mesh coil keep flavor consistent from the first puff to the last.',
-    badge: 'Premium',
-    images: ['breeze-pro-max-10000-strawberry-kiwi.svg'],
+    image: 'breeze-mega-line.svg',
   },
-  {
-    slug: 'breeze-pod-starter-kit',
-    name: 'Breeze Pod System Starter Kit',
-    price: 34.99,
-    category: 'pod-systems',
-    subcategory: 'rechargeable-pods',
-    short: 'Everything needed to start with the Breeze rechargeable pod system.',
-    description:
-      'The Breeze Pod System Starter Kit includes the rechargeable battery, a USB-C cable, and two prefilled pods. Adjustable airflow and a low-e-liquid indicator make it an easy first step into pod-based vaping.',
-    badge: 'New',
-    images: ['breeze-pod-starter-kit.svg'],
-  },
-  {
-    slug: 'breeze-rechargeable-pod-kit',
-    name: 'Breeze Rechargeable Pod Kit',
-    price: 27.99,
-    category: 'pod-systems',
-    subcategory: 'rechargeable-pods',
-    short: 'A slim rechargeable pod device compatible with the full Breeze pod flavor line.',
-    description:
-      'The Breeze Rechargeable Pod Kit is a slim, magnetic pod device compatible with the full range of Breeze prefilled pods. Built-in battery indicator and fast USB-C charging keep it ready for daily use.',
-    badge: 'Popular',
-    images: ['breeze-rechargeable-pod-kit.svg'],
-  },
-  {
-    slug: 'breeze-nic-salt-cool-mint-30ml',
-    name: 'Breeze Nic Salt E-Liquid 30ml — Cool Mint',
-    price: 12.99,
-    category: 'e-liquids',
-    subcategory: 'nic-salts',
-    short: 'A crisp cool mint nic salt e-liquid in a 30ml bottle.',
-    description:
-      'Breeze Cool Mint nic salt e-liquid delivers a crisp, refreshing mint in a smooth nicotine salt formula designed for pod systems. Packaged in a 30ml child-resistant bottle.',
+}
+
+const FLAVORS_BY_LINE = {
+  'breeze-pro': [
+    'Blue Raspberry', 'Mint', 'Grape Blackcurrant', 'Raspberry Lemon', 'Tropical Summer',
+    'Lemon Mint', 'Blueberry Watermelon', 'Glubule Mint (Chew Mint)', 'Blueberry Mint', 'Cherry Fizz',
+    'Strawberry Watermelon', 'Cherry Lemon', 'Pineapple Passionfruit', 'Lush Ice', 'Banana Mint',
+    'Strawberry Peach Mint', 'Peach Mango', 'Caribbean White (Pina)', 'BBG', 'Vani Tobacco (Vanilla Tobacco)',
+    'Grape S', 'Pomegranate Mint', 'Blueberry Banana', 'StrawKiwi', 'Orange Mango Watermelon',
+    'Tobacco', 'Strawberry Banana', 'Banana Coconut', 'Rush', 'Strawberry Lime Acai', 'Guava Lemon',
+  ],
+  'breeze-prime': [
+    'Cherry Lemon', 'Peach Berry', 'Blueberry Lemon', 'Juicy Peach Ice', 'Mint', 'Strawberry Mint',
+    'Grape', 'Honeydew Pineapple', 'Strawberry Apple', 'Double Apple', 'Mango', 'Banana Coconut',
+  ],
+  'breeze-elite': [
+    'Blue Raspberry', 'Raspberry Peach Ice', 'Black Cherry', 'Strawberry Pineapple Ice', 'Cherry Lemon',
+    'Raspberry Watermelon', 'Burst Ice (Punch Ice)', 'Strawberry Banana', 'Cherry Watermelon',
+    'Orange Pineapple Tangerine', 'Kiwi Dragon Fruit Berry (Kiwi Dragon Berry)', 'Apple Cranberry',
+  ],
+  'breeze-mega': [
+    'Blue Raspberry', 'Blueberry Lemon', 'Cherry Lemon', 'Grape', 'Juicy Peach Ice',
+    'Lush Ice', 'Mango', 'Mint', 'Peach Berry', 'Strawberry Peach Mint',
+  ],
+}
+
+const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, flavors]) => {
+  const spec = LINE_SPECS[lineSlug]
+  return flavors.map((flavor) => ({
+    slug: `${lineSlug}-${slugify(flavor)}`,
+    name: `${spec.label} — ${flavor}`,
+    price: spec.price,
+    category: lineSlug,
+    subcategory: '',
+    short: `${spec.label} disposable vape in ${flavor}, ${spec.puffs}.`,
+    description: `${spec.label} in ${flavor} delivers ${spec.puffs} from a ${spec.battery}, with ${spec.eliquid} at ${spec.nicotine}. Draw-activated — no charging or refilling required.`,
     badge: '',
-    images: ['breeze-nic-salt-cool-mint-30ml.svg'],
-  },
-  {
-    slug: 'breeze-freebase-peach-ice-60ml',
-    name: 'Breeze Freebase E-Liquid 60ml — Peach Ice',
-    price: 14.99,
-    category: 'e-liquids',
-    subcategory: 'freebase',
-    short: 'Sweet peach with a cool finish in a 60ml freebase e-liquid bottle.',
-    description:
-      'Breeze Peach Ice freebase e-liquid balances sweet, ripe peach with a cool menthol finish. Bottled at 60ml for extended use in standard vape tanks and mods.',
-    badge: 'Sale',
-    images: ['breeze-freebase-peach-ice-60ml.svg'],
-  },
-  {
-    slug: 'breeze-usb-c-fast-charger',
-    name: 'Breeze USB-C Fast Charger',
-    price: 9.99,
-    category: 'accessories',
-    subcategory: 'chargers',
-    short: 'An official fast-charging USB-C cable for rechargeable Breeze devices.',
-    description:
-      'The Breeze USB-C Fast Charger is built and tested for rechargeable Breeze devices, delivering a full charge quickly and safely without overcharging your device.',
-    badge: '',
-    images: ['breeze-usb-c-fast-charger.svg'],
-  },
-  {
-    slug: 'breeze-protective-carry-case',
-    name: 'Breeze Protective Carry Case',
-    price: 11.99,
-    category: 'accessories',
-    subcategory: 'cases',
-    short: 'A slim protective case that keeps your Breeze device and spare pods together.',
-    description:
-      'The Breeze Protective Carry Case is a slim, silicone-lined case sized for Breeze disposables and pod devices, with a pocket for a spare pod or cable.',
-    badge: '',
-    images: ['breeze-protective-carry-case.svg'],
-  },
+    images: [spec.image],
+  }))
+})
+
+const ELIQUID_FLAVORS = [
+  'Raspberry Lemon', 'Blue Raspberry', 'Peach Berry', 'Mint', 'Juicy Peach Ice',
+  'Honeydew Pineapple', 'Grape', 'Blueberry Mint', 'Cherry Lemon', 'Blueberry Lemon',
+]
+
+const eliquidProducts = ELIQUID_FLAVORS.map((flavor) => ({
+  slug: `e-liquid-${slugify(flavor)}`,
+  name: `Breeze E-Liquid — ${flavor}`,
+  price: 17.99,
+  category: 'e-liquids',
+  subcategory: '',
+  short: `Breeze nicotine salt e-liquid in ${flavor}, 30ml bottle.`,
+  description: `Breeze E-Liquid in ${flavor} is a 30ml nicotine salt e-liquid at 20mg, blended 50VG/50PG for a smooth throat hit and balanced vapor production. Compatible with standard pod systems and refillable devices.`,
+  badge: '',
+  images: ['breeze-eliquids-line.svg'],
+}))
+
+const bundleProducts = [
+  { slug: 'breeze-pro-six-pack', name: 'Breeze Pro Six Pack', price: 99.99, desc: 'Six Breeze Pro disposables (2000 puffs each), mixed or matched flavors.' },
+  { slug: 'breeze-elite-six-pack', name: 'Breeze Elite Six Pack', price: 124.99, desc: 'Six Breeze Elite disposables (4000 puffs each), mixed or matched flavors.' },
+  { slug: 'breeze-mega-duo-pack', name: 'Breeze Mega Duo Pack', price: 49.99, desc: 'Two Breeze Mega rechargeable disposables (up to 60,000 puffs each).' },
+  { slug: 'breeze-pro-trio-pack', name: 'Breeze Pro Trio Pack', price: 54.99, desc: 'Three Breeze Pro disposables (2000 puffs each), mixed or matched flavors.' },
+  { slug: 'breeze-prime-trio-pack', name: 'Breeze Prime Trio Pack', price: 74.99, desc: 'Three Breeze Prime disposables (6000 puffs each), mixed or matched flavors.' },
+  { slug: 'breeze-mega-quad-pack', name: 'Breeze Mega Quad Pack', price: 99.99, desc: 'Four Breeze Mega rechargeable disposables (up to 60,000 puffs each).' },
+].map((b) => ({
+  slug: b.slug,
+  name: b.name,
+  price: b.price,
+  category: 'bundles',
+  subcategory: '',
+  short: b.desc,
+  description: `${b.desc} Bundle pricing saves compared to buying each device individually — mix flavors across the bundle by noting your picks in the order notes.`,
+  badge: 'Bundle',
+  images: ['breeze-bundles-line.svg'],
+}))
+
+export const PRODUCTS = [...disposableProducts, ...eliquidProducts, ...bundleProducts]
+
+// A curated, diverse subset for the homepage — one or two picks per line so
+// the featured grid isn't dominated by a single product line.
+export const FEATURED_SLUGS = [
+  'breeze-pro-blue-raspberry',
+  'breeze-pro-lush-ice',
+  'breeze-prime-cherry-lemon',
+  'breeze-prime-mint',
+  'breeze-elite-blue-raspberry',
+  'breeze-mega-blue-raspberry',
+  'e-liquid-mint',
+  'breeze-pro-six-pack',
 ]
 
 export const POSTS = [
@@ -226,32 +241,32 @@ export const POSTS = [
     excerpt:
       'A rundown of every Breeze flavor family — from icy fruit blends to classic menthol — and how to pick the right one for your taste.',
     category: 'Flavors',
-    body: `Breeze vapes are built around a wide flavor lineup that spans icy fruit blends, classic menthol, and dessert-inspired profiles. This guide breaks down the main flavor families across the Breeze Bar, Breeze Plus, and Breeze Pro Max lines so you can find the right one faster.
+    body: `Breeze vapes are built around a wide flavor lineup that spans icy fruit blends, classic mint, and tobacco-inspired profiles, offered across the Breeze Pro, Prime, Elite, and Mega lines. This guide breaks down the main flavor families so you can find the right one faster.
 
-**Icy fruit blends.** Flavors like Blue Razz Ice, Watermelon Ice, and Strawberry Kiwi pair a fruit-forward base with a cooling menthol finish. These are the most popular Breeze flavors for vapers who want sweetness without it feeling heavy.
+**Icy fruit blends.** Flavors like Blue Raspberry, Lush Ice, and Raspberry Peach Ice pair a fruit-forward base with a cooling menthol finish. These are some of the most popular Breeze flavors for vapers who want sweetness without it feeling heavy.
 
-**Tropical and stone fruit.** Mango and Peach Ice profiles lean sweeter and less icy, better suited to vapers who prefer a smoother, less menthol-forward draw.
+**Tropical and stone fruit.** Peach Berry, Mango, and Honeydew Pineapple profiles lean sweeter and less icy, better suited to vapers who prefer a smoother, less menthol-forward draw.
 
-**Classic mint and menthol.** For vapers who want a clean, refreshing draw without fruit sweetness, Breeze's Cool Mint nic salt e-liquid is the closest match to a traditional menthol profile.
+**Classic mint and tobacco.** For vapers who want a clean, refreshing draw without fruit sweetness, Breeze Mint (available across every line) and Breeze Pro Tobacco are the closest match to a traditional profile.
 
 Whichever flavor family you land on, pairing it with the right puff count and nicotine strength — covered in our other Breeze vape guides — makes the biggest difference in day-to-day satisfaction. Browse the full flavor lineup on the [Breeze Vapes shop](/shop/).`,
   },
   {
     slug: 'breeze-pro-vs-breeze-bar',
-    title: 'Breeze Pro vs. Breeze Bar: Which One Should You Choose?',
+    title: 'Breeze Pro vs. Breeze Prime vs. Breeze Elite: Which One Should You Choose?',
     date: '2026-07-22',
     excerpt:
-      'Breeze Pro and Breeze Bar cover different needs — here is how puff count, size, and battery life compare.',
+      'Breeze Pro, Prime, and Elite cover different needs — here is how puff count, battery, and e-liquid capacity compare.',
     category: 'Comparisons',
-    body: `Breeze Pro and Breeze Bar are both part of the Breeze disposable lineup, but they're built for different habits. Here's how they compare.
+    body: `Breeze Pro, Breeze Prime, and Breeze Elite are all part of the Breeze disposable lineup, but they're built for different habits. Here's how they compare.
 
-**Puff count and size.** Breeze Bar sits in the middle of the lineup at 2000 puffs, in a compact form factor. Breeze Pro Max scales up to 10000 puffs with a larger rechargeable battery, trading pocket size for longevity.
+**Puff count and battery.** Breeze Pro sits at the entry point with 2000 puffs and a 1000mAh battery. Breeze Elite steps up to 4000 puffs on a 1200mAh battery. Breeze Prime tops the disposable range at 6000 puffs with a 1500mAh battery — for even more, Breeze Mega is rechargeable and rated up to 60,000 puffs.
 
-**Battery.** Breeze Pro devices use a rechargeable battery designed to last the full e-liquid capacity, while Breeze Bar is a fully disposable, single-use device.
+**E-liquid capacity.** Breeze Pro and Elite both ship with 6mL of pre-filled e-liquid, while Breeze Prime carries a larger 10mL fill to match its higher puff count.
 
-**Who each is for.** If you vape occasionally or want the smallest device possible, Breeze Bar is the simpler pick. If you go through disposables quickly and want fewer replacements, Breeze Pro Max is built for that.
+**Who each is for.** If you vape occasionally or want the lowest price per device, Breeze Pro is the simpler pick. If you go through disposables quickly and want fewer replacements without paying for the largest device, Breeze Elite is the middle ground. If you want the longest-lasting single disposable, Breeze Prime is built for that.
 
-See both lines side by side in the [Disposables category](/shop/disposables/).`,
+See every line side by side in the [Breeze Pro category](/shop/breeze-pro/), [Breeze Prime category](/shop/breeze-prime/), and [Breeze Elite category](/shop/breeze-elite/).`,
   },
   {
     slug: 'how-to-choose-your-breeze-vape',
@@ -260,13 +275,13 @@ See both lines side by side in the [Disposables category](/shop/disposables/).`,
     excerpt:
       'New to Breeze? Here is how to think about puff count, nicotine strength, and device type before you order.',
     category: 'Buying Guides',
-    body: `Choosing between disposables, pod systems, and e-liquids comes down to three questions: how often you vape, how much control you want over nicotine strength, and whether you want to refill or replace.
+    body: `Choosing between the Breeze disposable lines and Breeze e-liquid comes down to three questions: how often you vape, how much device you want to carry, and whether you already own a refillable pod system.
 
-**If you want zero maintenance,** a Breeze disposable — Bar, Plus, or Pro Max — is the simplest option. Pick a puff count that matches how often you'd otherwise replace the device.
+**If you want zero maintenance,** a Breeze disposable — Pro, Elite, Prime, or Mega — is the simplest option. Pick a puff count that matches how often you'd otherwise replace the device: Pro for occasional use, Elite or Prime for daily use, Mega if you want a rechargeable device rated up to 60,000 puffs.
 
-**If you vape daily and want to control cost per session,** a Breeze pod system with refillable or prefilled pods generally works out cheaper over time than disposables.
+**If you buy in volume,** a Breeze Bundle (Six Pack, Trio Pack, Duo Pack, or Quad Pack) works out cheaper per device than buying single units.
 
-**If you already own a device,** Breeze nic salt and freebase e-liquids let you customize flavor and nicotine strength independently.
+**If you already own a refillable pod system,** Breeze E-Liquid in a 30ml nicotine salt bottle lets you customize flavor independently of any specific disposable device.
 
 Every Breeze product ships nationwide across the United States with crypto payment accepted. Have questions before ordering? Visit our [FAQ page](/faq/) or [contact us](/contact/) directly.`,
   },
@@ -275,7 +290,7 @@ Every Breeze product ships nationwide across the United States with crypto payme
 export const FAQS = [
   {
     q: 'What is Breeze Vapes?',
-    a: 'Breeze Vapes is a USA-based online vape shop founded in 2015, offering Breeze disposable vapes, pod systems, e-liquids, and accessories with nationwide shipping across the United States.',
+    a: 'Breeze Vapes is a USA-based online vape shop founded in 2015, offering the full Breeze Pro, Prime, Elite, and Mega disposable lineup plus Breeze e-liquids and multi-packs, with nationwide shipping across the United States.',
   },
   {
     q: 'What is the minimum order amount?',

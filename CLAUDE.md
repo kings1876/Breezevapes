@@ -29,11 +29,17 @@ files directly if Node isn't available (they are also committed, not purely gene
 - `FORMS.web3formsKey` — get a free key at web3forms.com tied to the real inbox above.
 - `CHAT.channels` — Tawk.to property/widget ID is `PENDING/PENDING`; the chat widget stays off (falls back to
   a Contact-page button) until a real ID is set.
-- Product catalog (`PRODUCTS` in site.js) is a realistic placeholder set — swap in real names, prices, and photos.
+- Product catalog uses real Breeze product-line names, flavor names, puff counts, battery specs, and bottle
+  sizes (81 products: Breeze Pro/Prime/Elite/Mega flavors, E-Liquids, Bundles) — this factual data is not
+  copyrightable and was compiled from public product-line specs. Product **images are still generic
+  per-line placeholder SVGs** and descriptions/prices are original to this site, not copied from any
+  retailer. Real product photography must come from the actual Breeze distributor/manufacturer for an
+  authorized reseller, never scraped from a competitor.
 
 ## Brand facts (only these are true — never invent more)
 - Founded 2015, United States. Ships nationwide across the United States.
-- Categories: Disposables, Pod Systems, E-Liquids, Accessories.
+- Categories: Breeze Pro (2000 puffs), Breeze Prime (6000 puffs), Breeze Elite (4000 puffs), Breeze Mega
+  (rechargeable, up to 60,000 puffs), E-Liquids (30ml, 20mg nic salt), Bundles.
 - Minimum order $150, free shipping over $300, flat $15 shipping fee under that.
 - Payment: cryptocurrency only (BTC, USDT), 10% automatic discount for crypto.
 - Age restriction: 21+.
