@@ -1,0 +1,13 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://breezevapes.net/",
+      "https://www.iana.org/assignments/link-relations/service-doc": [
+        { "href": "https://breezevapes.net/faq/" }
+      ],
+      "title": "Breeze Vapes — Catch the Breeze."
+    },
+    { "anchor": "https://breezevapes.net/shop/", "type": "text/html", "title": "Breeze Vapes Product Catalog" },
+    { "anchor": "https://breezevapes.net/blog/", "type": "text/html", "title": "Breeze Vapes Blog" }
+  ]
+}

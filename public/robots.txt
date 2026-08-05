@@ -1,0 +1,49 @@
+User-agent: *
+Allow: /
+
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# AI crawlers — welcome to index product & content pages
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://breezevapes.net/sitemap.xml
+
+# Agent-readable resources
+# llms.txt: https://breezevapes.net/llms.txt
+# API Catalog: https://breezevapes.net/.well-known/api-catalog
+# Agent Skills: https://breezevapes.net/.well-known/agent-skills/index.json
+# MCP Server Card: https://breezevapes.net/.well-known/mcp/server-card.json

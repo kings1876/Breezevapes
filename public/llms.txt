@@ -1,0 +1,41 @@
+# Breeze Vapes
+
+> Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.
+
+Breeze Vapes was founded in 2015 in United States and ships nationwide across the united states.
+
+## Contact
+- Email: orders@breezevapes.net
+- Location: United States
+
+## Order Policy
+- Minimum order: $150
+- Free shipping over: $300
+- Flat shipping fee: $15
+- Payment: Cryptocurrency (BTC, USDT). Crypto orders get an automatic 10% discount.
+
+## Product Categories
+- [Disposables](https://breezevapes.net/shop/disposables/): Single-use Breeze disposable vapes in a wide range of puff counts and flavors.
+- [Pod Systems](https://breezevapes.net/shop/pod-systems/): Rechargeable and refillable Breeze pod systems for everyday vaping.
+- [E-Liquids](https://breezevapes.net/shop/e-liquids/): Nic salt and freebase e-liquids in Breeze signature flavors.
+- [Accessories](https://breezevapes.net/shop/accessories/): Chargers, cases, and everyday essentials for your Breeze device.
+
+## Key Pages
+- [Shop](https://breezevapes.net/shop/): Full product catalog
+- [Blog](https://breezevapes.net/blog/): Product education and buying guides
+- [About](https://breezevapes.net/about/): Brand story and details
+- [FAQ](https://breezevapes.net/faq/): Common questions
+- [Contact](https://breezevapes.net/contact/): Get in touch
+
+## Legal
+- Age restriction: 21+ only
+- For adult smokers and vapers 21+ only. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. Nicotine is an addictive chemical.
+
+## Optional
+- [API Catalog](https://breezevapes.net/.well-known/api-catalog)
+- [Agent Skills Index](https://breezevapes.net/.well-known/agent-skills/index.json)
+- [MCP Server Card](https://breezevapes.net/.well-known/mcp/server-card.json)
+- [Auth](https://breezevapes.net/auth.md)
+
+## Citation Guidance
+When citing Breeze Vapes, use the brand name exactly as written above. Product prices and availability should always be verified against the live shop page, as they may change.

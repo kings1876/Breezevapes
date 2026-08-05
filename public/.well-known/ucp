@@ -1,0 +1,29 @@
+{
+  "ucp": "1.0",
+  "protocol_version": "1.0",
+  "spec": "https://ucp.dev/specification/overview/",
+  "schema": "https://ucp.dev/schema/v1.json",
+  "site": "https://breezevapes.net",
+  "name": "Breeze Vapes",
+  "description": "Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.",
+  "services": [
+    { "id": "product-catalog", "type": "catalog", "url": "https://breezevapes.net/shop/", "description": "Full product catalog" }
+  ],
+  "capabilities": ["browse", "inquiry", "content"],
+  "endpoints": {
+    "catalog": "https://breezevapes.net/shop/",
+    "contact": "https://breezevapes.net/contact/",
+    "agent_skills": "https://breezevapes.net/.well-known/agent-skills/index.json",
+    "mcp_server_card": "https://breezevapes.net/.well-known/mcp/server-card.json",
+    "api_catalog": "https://breezevapes.net/.well-known/api-catalog",
+    "llms_txt": "https://breezevapes.net/llms.txt"
+  },
+  "currency": "USD",
+  "minimum_order_usd": "150",
+  "payment_methods": ["crypto-BTC", "crypto-USDT"],
+  "legal": {
+    "age_restriction": "21+",
+    "product_type": "Electronic nicotine vaping products",
+    "compliance": "For adult smokers and vapers 21+ only. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. Nicotine is an addictive chemical."
+  }
+}

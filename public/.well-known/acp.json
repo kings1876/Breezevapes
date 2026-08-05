@@ -1,0 +1,24 @@
+{
+  "protocol": { "name": "acp", "version": "0.1.0" },
+  "name": "Breeze Vapes",
+  "description": "Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.",
+  "api_base_url": "https://breezevapes.net",
+  "homepage": "https://breezevapes.net",
+  "transports": ["https"],
+  "capabilities": {
+    "services": ["product-catalog", "blog", "faq"],
+    "ordering": "human_ordering_only",
+    "payment_methods": ["crypto-BTC", "crypto-USDT"],
+    "currency": "USD",
+    "minimum_order_usd": "150",
+    "free_shipping_threshold_usd": "300"
+  },
+  "contact": { "email": "orders@breezevapes.net" },
+  "legal": {
+    "age_restriction": "21+",
+    "region": "United States",
+    "ships_to": "Nationwide across the United States",
+    "product_type": "Electronic nicotine vaping products",
+    "compliance": "For adult smokers and vapers 21+ only. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. Nicotine is an addictive chemical."
+  }
+}
