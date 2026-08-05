@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   if (typeof navigator === 'undefined' || !navigator.modelContext) return;
   navigator.modelContext.provideContext({
     tools: [
@@ -7,7 +7,7 @@
         description: 'Browse products by category',
         inputSchema: { type: 'object', properties: { category: { type: 'string', description: 'Product category to browse' } } },
         execute: async ({ category }) => {
-          const url = category ? 'https://breezevapes.net/shop/' + category + '/' : 'https://breezevapes.net/shop/';
+          const url = category ? 'https://www.breezevapes.net/shop/' + category + '/' : 'https://www.breezevapes.net/shop/';
           window.location.href = url;
           return { url };
         }
@@ -17,8 +17,8 @@
         description: 'Contact for product questions or support',
         inputSchema: { type: 'object', properties: {} },
         execute: async () => {
-          window.location.href = 'https://breezevapes.net/contact/';
-          return { url: 'https://breezevapes.net/contact/' };
+          window.location.href = 'https://www.breezevapes.net/contact/';
+          return { url: 'https://www.breezevapes.net/contact/' };
         }
       }
     ]

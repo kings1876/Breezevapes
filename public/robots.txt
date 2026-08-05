@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
 Content-Signal: search=yes, ai-input=yes, ai-train=no
@@ -40,10 +40,10 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://breezevapes.net/sitemap.xml
+Sitemap: https://www.breezevapes.net/sitemap.xml
 
 # Agent-readable resources
-# llms.txt: https://breezevapes.net/llms.txt
-# API Catalog: https://breezevapes.net/.well-known/api-catalog
-# Agent Skills: https://breezevapes.net/.well-known/agent-skills/index.json
-# MCP Server Card: https://breezevapes.net/.well-known/mcp/server-card.json
+# llms.txt: https://www.breezevapes.net/llms.txt
+# API Catalog: https://www.breezevapes.net/.well-known/api-catalog
+# Agent Skills: https://www.breezevapes.net/.well-known/agent-skills/index.json
+# MCP Server Card: https://www.breezevapes.net/.well-known/mcp/server-card.json

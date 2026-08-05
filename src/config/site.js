@@ -5,8 +5,8 @@
 export const SITE = {
   name: 'Breeze Vapes',
   tagline: 'Catch the Breeze.',
-  domain: 'breezevapes.net',
-  url: 'https://breezevapes.net',
+  domain: 'www.breezevapes.net',
+  url: 'https://www.breezevapes.net',
   description:
     'Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.',
   locale: 'en',

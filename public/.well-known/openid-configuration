@@ -1,5 +1,5 @@
-{
-  "issuer": "https://breezevapes.net",
+﻿{
+  "issuer": "https://www.breezevapes.net",
   "note": "Breeze Vapes does not operate an OpenID Connect provider. All resources are publicly accessible.",
   "public_site": true,
   "authorization_endpoint": null,

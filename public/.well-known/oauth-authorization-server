@@ -1,5 +1,5 @@
-{
-  "issuer": "https://breezevapes.net",
+﻿{
+  "issuer": "https://www.breezevapes.net",
   "authorization_endpoint": null,
   "token_endpoint": null,
   "jwks_uri": null,
@@ -8,11 +8,11 @@
   "scopes_supported": [],
   "note": "Breeze Vapes has no protected APIs. All resources are publicly accessible.",
   "public_resources": [
-    "https://breezevapes.net/shop/",
-    "https://breezevapes.net/blog/",
-    "https://breezevapes.net/faq/",
-    "https://breezevapes.net/llms.txt",
-    "https://breezevapes.net/.well-known/api-catalog"
+    "https://www.breezevapes.net/shop/",
+    "https://www.breezevapes.net/blog/",
+    "https://www.breezevapes.net/faq/",
+    "https://www.breezevapes.net/llms.txt",
+    "https://www.breezevapes.net/.well-known/api-catalog"
   ],
   "agent_auth": {
     "register_uri": null,

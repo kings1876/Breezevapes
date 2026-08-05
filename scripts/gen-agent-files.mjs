@@ -441,14 +441,9 @@ write(
     {
       $schema: 'https://openapi.vercel.sh/vercel.json',
       trailingSlash: true,
-      redirects: [
-        {
-          source: '/:path*',
-          has: [{ type: 'host', value: `www.${D}` }],
-          destination: `${U}/:path*`,
-          permanent: true,
-        },
-      ],
+      // No apex/www redirect here — Vercel's own domain config already
+      // redirects the non-primary domain to SITE.domain. Adding a second,
+      // opposing redirect here caused an ERR_TOO_MANY_REDIRECTS loop.
       headers: [
         {
           source: '/(.*)',

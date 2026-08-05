@@ -1,9 +1,9 @@
-{
+﻿{
   "protocol": { "name": "acp", "version": "0.1.0" },
   "name": "Breeze Vapes",
   "description": "Breeze Vapes is a USA-based online vape shop offering disposable vapes, pod systems, e-liquids, and accessories nationwide, with crypto payment and fast, discreet shipping.",
-  "api_base_url": "https://breezevapes.net",
-  "homepage": "https://breezevapes.net",
+  "api_base_url": "https://www.breezevapes.net",
+  "homepage": "https://www.breezevapes.net",
   "transports": ["https"],
   "capabilities": {
     "services": ["product-catalog", "blog", "faq"],

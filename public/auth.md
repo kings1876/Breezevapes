@@ -1,4 +1,4 @@
-# Auth.md
+﻿# Auth.md
 
 Breeze Vapes — Electronic nicotine vaping products.
 
@@ -10,13 +10,13 @@ No authentication is required to access any public resource on breezevapes.net. 
 
 | Resource | URL |
 |---|---|
-| Homepage | https://breezevapes.net/ |
-| Shop | https://breezevapes.net/shop/ |
-| Blog | https://breezevapes.net/blog/ |
-| FAQ | https://breezevapes.net/faq/ |
-| Contact | https://breezevapes.net/contact/ |
-| llms.txt | https://breezevapes.net/llms.txt |
-| API Catalog | https://breezevapes.net/.well-known/api-catalog |
+| Homepage | https://www.breezevapes.net/ |
+| Shop | https://www.breezevapes.net/shop/ |
+| Blog | https://www.breezevapes.net/blog/ |
+| FAQ | https://www.breezevapes.net/faq/ |
+| Contact | https://www.breezevapes.net/contact/ |
+| llms.txt | https://www.breezevapes.net/llms.txt |
+| API Catalog | https://www.breezevapes.net/.well-known/api-catalog |
 
 ```json
 {
