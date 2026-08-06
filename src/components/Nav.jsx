@@ -1,11 +1,12 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { SITE, CATEGORIES } from '@/config/site'
 import { getCart, cartCount } from '@/lib/cart'
 
 const NAV_ITEMS = [
-  { label: 'Shop', href: '/shop/', mega: true },
+  { label: 'Shop', href: '/shop/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
@@ -13,8 +14,12 @@ const NAV_ITEMS = [
 ]
 
 export default function Nav() {
-  const [open, setOpen] = useState(false)
+  const router = useRouter()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [query, setQuery] = useState('')
   const [count, setCount] = useState(0)
+  const searchInputRef = useRef(null)
 
   useEffect(() => {
     const sync = () => setCount(cartCount(getCart()))
@@ -22,6 +27,18 @@ export default function Nav() {
     window.addEventListener('bv-cart-updated', sync)
     return () => window.removeEventListener('bv-cart-updated', sync)
   }, [])
+
+  useEffect(() => {
+    if (searchOpen) searchInputRef.current?.focus()
+  }, [searchOpen])
+
+  function submitSearch(e) {
+    e.preventDefault()
+    if (query.trim()) {
+      router.push(`/search/?q=${encodeURIComponent(query.trim())}`)
+      setSearchOpen(false)
+    }
+  }
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, background: '#fff', borderBottom: '1px solid var(--border)' }}>
@@ -31,52 +48,88 @@ export default function Nav() {
           {SITE.name}
         </Link>
 
-        <nav aria-label="Primary" style={{ display: 'none' }} className="nav-desktop">
-          <ul style={{ display: 'flex', gap: '1.5rem', listStyle: 'none', margin: 0, padding: 0 }}>
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href} style={{ position: 'relative' }} className={item.mega ? 'has-mega' : ''}>
-                <Link href={item.href} style={{ color: 'var(--dark)', fontWeight: 600 }}>
-                  {item.label}
-                </Link>
-                {item.mega && (
-                  <div className="mega-dropdown">
-                    {CATEGORIES.map((c) => (
-                      <Link key={c.slug} href={`/shop/${c.slug}/`}>
-                        {c.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', position: 'relative' }}>
+          {/* Search */}
+          <div style={{ position: 'relative' }}>
+            <button
+              type="button"
+              aria-label={searchOpen ? 'Close search' : 'Search products'}
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="nav-icon-btn"
+            >
+              <span aria-hidden="true">{searchOpen ? '✕' : '🔍'}</span>
+            </button>
+            {searchOpen && (
+              <form onSubmit={submitSearch} className="nav-search-panel" role="search">
+                <input
+                  ref={searchInputRef}
+                  type="search"
+                  name="q"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search products…"
+                  aria-label="Search products"
+                  style={{ flex: 1, border: 'none', outline: 'none', padding: '0.6rem 0.75rem', fontSize: '0.95rem' }}
+                />
+                <button type="submit" className="btn btn-primary" style={{ padding: '0.5rem 0.9rem', margin: '0.25rem' }}>
+                  Go
+                </button>
+              </form>
+            )}
+          </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <Link href="/order/" className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', position: 'relative' }} aria-label={`Order now, ${count} item${count === 1 ? '' : 's'} in cart`}>
-            Order{count > 0 ? ` (${count})` : ' Now'}
+          {/* Cart */}
+          <Link
+            href="/order/"
+            className="nav-icon-btn"
+            aria-label={`Order now, ${count} item${count === 1 ? '' : 's'} in cart`}
+            style={{ position: 'relative', textDecoration: 'none' }}
+          >
+            <span aria-hidden="true">🛒</span>
+            {count > 0 && (
+              <span aria-hidden="true" className="cart-count">
+                {count}
+              </span>
+            )}
           </Link>
+
+          {/* Menu */}
           <button
             type="button"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-            className="hamburger"
-            style={{ display: 'flex', width: 44, height: 44, alignItems: 'center', justifyContent: 'center', background: 'none', border: '1.5px solid var(--border)', borderRadius: 10 }}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="nav-icon-btn"
           >
-            <span aria-hidden="true">{open ? '✕' : '☰'}</span>
+            <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
           </button>
         </div>
       </div>
 
-      {open && (
-        <nav aria-label="Mobile" className="container" style={{ paddingBottom: '1rem' }}>
+      {menuOpen && (
+        <nav aria-label="Primary" className="container" style={{ paddingBottom: '1.25rem' }}>
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} onClick={() => setOpen(false)} style={{ display: 'block', padding: '0.75rem 0.25rem', color: 'var(--dark)', fontWeight: 600, minHeight: 44 }}>
+                <Link href={item.href} onClick={() => setMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 0.25rem', color: 'var(--dark)', fontWeight: 600, minHeight: 44 }}>
                   {item.label}
                 </Link>
+                {item.href === '/shop/' && (
+                  <ul style={{ listStyle: 'none', margin: '0 0 0.5rem', padding: '0 0 0 1rem', display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
+                    {CATEGORIES.map((c) => (
+                      <li key={c.slug}>
+                        <Link
+                          href={`/shop/${c.slug}/`}
+                          onClick={() => setMenuOpen(false)}
+                          style={{ display: 'block', padding: '0.5rem 0.25rem', color: 'var(--text-muted)', minHeight: 44 }}
+                        >
+                          {c.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
@@ -84,28 +137,49 @@ export default function Nav() {
       )}
 
       <style>{`
-        @media (min-width: 901px) {
-          .nav-desktop { display: block !important; }
-          .hamburger { display: none !important; }
+        .nav-icon-btn {
+          display: flex;
+          width: 44px;
+          height: 44px;
+          align-items: center;
+          justify-content: center;
+          background: none;
+          border: 1.5px solid var(--border);
+          border-radius: 10px;
+          font-size: 1.1rem;
+          color: var(--dark);
+          cursor: pointer;
         }
-        .has-mega .mega-dropdown {
-          display: none;
+        .nav-icon-btn:hover { border-color: var(--primary); }
+        .cart-count {
           position: absolute;
-          top: 100%;
-          left: 0;
+          top: -6px;
+          right: -6px;
+          background: var(--primary);
+          color: #fff;
+          font-size: 0.7rem;
+          font-weight: 700;
+          min-width: 18px;
+          height: 18px;
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 4px;
+        }
+        .nav-search-panel {
+          position: absolute;
+          top: calc(100% + 0.5rem);
+          right: 0;
+          display: flex;
+          align-items: center;
           background: #fff;
           border: 1px solid var(--border);
-          border-radius: 10px;
+          border-radius: 12px;
           box-shadow: var(--shadow);
-          padding: 0.5rem;
-          min-width: 200px;
-          flex-direction: column;
-          z-index: 50;
+          width: min(320px, 80vw);
+          z-index: 60;
         }
-        .has-mega:hover .mega-dropdown { display: flex; }
-        .mega-dropdown a { padding: 0.5rem 0.75rem; border-radius: 8px; color: var(--dark); }
-        .mega-dropdown a:hover { background: var(--bg-tint); text-decoration: none; }
-        @media (max-width: 900px) { .mega-dropdown { display: none !important; } }
       `}</style>
     </header>
   )
