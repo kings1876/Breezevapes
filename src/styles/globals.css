@@ -173,6 +173,35 @@ textarea {
   color: var(--dark);
 }
 
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: '+';
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after {
+  content: '\2212';
+}
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .grid {
   display: grid;
   gap: 1.5rem;

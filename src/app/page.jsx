@@ -185,12 +185,12 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <h2>Frequently Asked Questions</h2>
-          <div className="grid grid-2">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 800 }}>
             {FAQS.map((f) => (
-              <div key={f.q} className="card" style={{ padding: '1.25rem' }}>
-                <h3 style={{ fontSize: '1rem' }}>{f.q}</h3>
-                <p style={{ margin: 0, color: 'var(--text-muted)' }}>{f.a}</p>
-              </div>
+              <details key={f.q} className="card faq-item" style={{ padding: '1rem 1.25rem' }}>
+                <summary>{f.q}</summary>
+                <p style={{ margin: '0.75rem 0 0', color: 'var(--text-muted)' }}>{f.a}</p>
+              </details>
             ))}
           </div>
         </div>
