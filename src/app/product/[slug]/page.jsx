@@ -54,19 +54,17 @@ export default function ProductPage({ params }) {
         ]}
       />
 
-      <div className="grid grid-2" style={{ alignItems: 'start', gap: '2.5rem' }}>
+      <div className="grid grid-2 product-top" style={{ alignItems: 'start', gap: '2.5rem' }}>
         <div className="product-frame card">
           <SmartImage src={`/images/${product.images[0]}`} alt={product.name} width={1600} height={1200} loading="eager" />
         </div>
 
         <div>
           {product.badge && <span className="badge">{product.badge}</span>}
-          <h1>{product.name}</h1>
-          <p className="price" style={{ fontSize: '1.4rem' }}>
+          <p className="price" style={{ fontSize: '1.4rem', marginTop: '0.5rem' }}>
             {SITE.currencySymbol}
             {product.price.toFixed(2)}
           </p>
-          <p style={{ color: 'var(--text-muted)' }}>{product.description}</p>
           <AddToOrder slug={product.slug} />
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
             {SITE.ageRestriction} and older only. {SITE.complianceStatement}
@@ -75,6 +73,11 @@ export default function ProductPage({ params }) {
             View order →
           </Link>
         </div>
+      </div>
+
+      <div style={{ marginTop: '2rem', maxWidth: 760 }}>
+        <h1>{product.name}</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.description}</p>
       </div>
 
       {related.length > 0 && (
