@@ -77,7 +77,7 @@ export default function ProductPage({ params }) {
 
       <div style={{ marginTop: '2rem' }}>
         <h1>{product.name}</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7, maxWidth: '75ch' }}>{product.description}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.description}</p>
       </div>
 
       {related.length > 0 && (
