@@ -250,6 +250,32 @@ function buildDisposableDescription({ label, flavor, puffs, battery, eliquid, ni
   return ensureMinWords(parts.join(' '), 100, index)
 }
 
+// Shorter (~50+ word) blurb shown in the purchase panel next to Add to
+// Order — distinct from both the card `short` line and the full `description`.
+const DISPOSABLE_SUMMARY_A = [
+  (label, flavor, note, puffs, nicotine) => `${label} — ${flavor} delivers a ${note} in a compact, draw-activated disposable rated for ${puffs} at ${nicotine} strength.`,
+  (label, flavor, note, puffs, nicotine) => `A ${note} defines ${label} in ${flavor}, a disposable vape built for ${puffs} of consistent flavor at ${nicotine}.`,
+  (label, flavor, note, puffs, nicotine) => `${flavor} gives this ${label} its ${note}, backed by ${puffs} and ${nicotine} strength in every device.`,
+]
+const DISPOSABLE_SUMMARY_B = [
+  () => `It's ready to vape straight out of the box, with no charging, refilling, or setup required — just open it and go.`,
+  () => `No buttons, no maintenance, no refills — just a reliable everyday disposable that's ready the moment you open it.`,
+]
+const DISPOSABLE_SUMMARY_B_RECHARGEABLE = [
+  () => `A rechargeable battery keeps it going far longer than a typical disposable, so you get more puffs before it's time to recycle.`,
+  () => `Rechargeable via USB-C, it's built to outlast a standard disposable while keeping the same grab-and-go simplicity.`,
+]
+
+function buildDisposableSummary({ label, flavor, puffs, nicotine, index, rechargeable }) {
+  const note = flavorNote(flavor)
+  const bPool = rechargeable ? DISPOSABLE_SUMMARY_B_RECHARGEABLE : DISPOSABLE_SUMMARY_B
+  const parts = [
+    DISPOSABLE_SUMMARY_A[index % DISPOSABLE_SUMMARY_A.length](label, flavor, note, puffs, nicotine),
+    bPool[index % bPool.length](),
+  ]
+  return ensureMinWords(parts.join(' '), 50, index + 1)
+}
+
 const ELIQUID_OPENERS = [
   (flavor, note) => `Breeze E-Liquid in ${flavor} brings a ${note} to any pod system or refillable device, made for vapers who want to customize their setup with genuine Breeze vape flavors.`,
   (flavor, note) => `${flavor} is one of the most popular Breeze E-Liquid flavors, delivering a ${note} in a nicotine salt formula built for smooth, everyday vaping sessions.`,
@@ -281,6 +307,23 @@ function buildEliquidDescription(flavor, index) {
   return ensureMinWords(parts.join(' '), 100, index)
 }
 
+const ELIQUID_SUMMARY_A = [
+  (flavor, note) => `Breeze E-Liquid — ${flavor} brings a ${note} to any pod system or refillable device, in a 30ml nicotine salt bottle at 20mg strength.`,
+  (flavor, note) => `${flavor} is a 30ml Breeze E-Liquid nicotine salt blend with a ${note}, mixed 50VG/50PG at 20mg for a smooth throat hit.`,
+]
+const ELIQUID_SUMMARY_B = [
+  () => `It's an easy way to switch flavors or top off a refillable device without buying a new disposable.`,
+  () => `Great for rotating flavors alongside your Breeze disposables or keeping a refillable pod stocked between orders.`,
+]
+function buildEliquidSummary(flavor, index) {
+  const note = flavorNote(flavor)
+  const parts = [
+    ELIQUID_SUMMARY_A[index % ELIQUID_SUMMARY_A.length](flavor, note),
+    ELIQUID_SUMMARY_B[index % ELIQUID_SUMMARY_B.length](),
+  ]
+  return ensureMinWords(parts.join(' '), 50, index + 2)
+}
+
 function buildBundleDescription({ name, line, count }, index) {
   const spec = LINE_SPECS[line]
   const parts = [
@@ -290,6 +333,15 @@ function buildBundleDescription({ name, line, count }, index) {
     `Order the ${name} online today with crypto payment accepted and fast, discreet nationwide shipping across the United States.`,
   ]
   return ensureMinWords(parts.join(' '), 100, index)
+}
+
+function buildBundleSummary({ name, line, count }, index) {
+  const spec = LINE_SPECS[line]
+  const parts = [
+    `The ${name} bundles ${count} ${spec.label} devices at a lower price than buying individually.`,
+    `Each device delivers ${spec.puffs} at ${spec.nicotine} strength, so you get plenty of vaping time across your favorite Breeze flavors in one order.`,
+  ]
+  return ensureMinWords(parts.join(' '), 50, index + 3)
 }
 
 // ---- Product generation ---------------------------------------------------
@@ -306,6 +358,14 @@ const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, f
       category: lineSlug,
       subcategory: '',
       short: `${spec.label} disposable vape in ${flavor}, ${spec.puffs}.`,
+      summary: buildDisposableSummary({
+        label: spec.label,
+        flavor,
+        puffs: spec.puffs,
+        nicotine: spec.nicotine,
+        index,
+        rechargeable: lineSlug === 'breeze-mega',
+      }),
       description: buildDisposableDescription({
         label: spec.label,
         flavor,
@@ -334,6 +394,7 @@ const eliquidProducts = ELIQUID_FLAVORS.map((flavor, index) => ({
   category: 'e-liquids',
   subcategory: '',
   short: `Breeze nicotine salt e-liquid in ${flavor}, 30ml bottle.`,
+  summary: buildEliquidSummary(flavor, index),
   description: buildEliquidDescription(flavor, index),
   badge: '',
   images: ['breeze-eliquids-line.svg'],
@@ -355,6 +416,7 @@ const bundleProducts = BUNDLE_DEFS.map((b, index) => ({
   category: 'bundles',
   subcategory: '',
   short: `${b.count} ${LINE_SPECS[b.line].label} disposables (${LINE_SPECS[b.line].puffs} each), mixed or matched flavors.`,
+  summary: buildBundleSummary(b, index),
   description: buildBundleDescription(b, index),
   badge: 'Bundle',
   images: ['breeze-bundles-line.svg'],

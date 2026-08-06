@@ -66,6 +66,7 @@ export default function ProductPage({ params }) {
             {product.price.toFixed(2)}
           </p>
           <AddToOrder slug={product.slug} />
+          <p style={{ color: 'var(--text-muted)', marginTop: '1.25rem', lineHeight: 1.6 }}>{product.summary}</p>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
             {SITE.ageRestriction} and older only. {SITE.complianceStatement}
           </p>
