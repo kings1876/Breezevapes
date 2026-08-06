@@ -167,19 +167,159 @@ const FLAVORS_BY_LINE = {
   ],
 }
 
+// ---- Description generation ---------------------------------------------
+// Every product gets a unique, 100+ word, SEO-oriented description built
+// from rotating sentence templates (never a single find/replace template)
+// plus a word-count safety net so the 100-word minimum is guaranteed
+// programmatically rather than by hand-counting 81 paragraphs.
+
+const FLAVOR_NOTES = [
+  { test: /ice/i, note: 'cooling, icy finish' },
+  { test: /mint|glubule/i, note: 'refreshing minty finish' },
+  { test: /tobacco|vani/i, note: 'smooth, tobacco-forward profile' },
+  { test: /grape/i, note: 'rich grape sweetness' },
+  { test: /apple/i, note: 'crisp apple sweetness' },
+  { test: /banana|coconut/i, note: 'smooth, creamy sweetness' },
+  { test: /berry|cherry|raspberry|strawberry|blueberry|cranberry|acai/i, note: 'bold, tangy berry profile' },
+  { test: /lemon|lime/i, note: 'bright citrus tang' },
+  { test: /mango|peach|pineapple|guava|passionfruit|tropical|honeydew|watermelon|caribbean|orange|tangerine|dragon|kiwi|rush|bbg/i, note: 'juicy tropical sweetness' },
+]
+function flavorNote(flavor) {
+  const hit = FLAVOR_NOTES.find((f) => f.test.test(flavor))
+  return hit ? hit.note : 'signature Breeze flavor blend'
+}
+
+const FILLER_SENTENCES = [
+  'Breeze Vapes ships fast and discreetly to addresses across the United States.',
+  'Every order is processed quickly, with standard or free shipping depending on order size.',
+  'Crypto payment is accepted on every order, with an automatic discount applied at checkout.',
+  'Breeze Vapes carries the full Breeze Pro, Prime, Elite, and Mega lineup alongside Breeze E-Liquid and bundles.',
+]
+function ensureMinWords(text, minWords, seedIndex) {
+  let result = text
+  let i = 0
+  while (result.trim().split(/\s+/).length < minWords && i < FILLER_SENTENCES.length) {
+    result += ' ' + FILLER_SENTENCES[(seedIndex + i) % FILLER_SENTENCES.length]
+    i++
+  }
+  return result
+}
+
+const DISPOSABLE_OPENERS = [
+  (label, flavor, note) => `${label} in ${flavor} is one of the most requested flavors in the Breeze vape lineup, delivering a ${note} from the very first draw.`,
+  (label, flavor, note) => `Looking for a ${label} flavor that stands out? ${flavor} brings a ${note} to every puff, making it a favorite among Breeze vape fans.`,
+  (label, flavor, note) => `${flavor} is a standout in the ${label} collection, built around a ${note} that keeps every session interesting from start to finish.`,
+  (label, flavor, note) => `For vapers who want a Breeze vape with real character, ${label} in ${flavor} delivers a ${note} that's hard to put down.`,
+]
+const DISPOSABLE_SPECS = [
+  (label, puffs, battery, eliquid, nicotine) => `This ${label} disposable vape is built for all-day performance, packing ${puffs} from a reliable ${battery} and ${eliquid} at ${nicotine} strength.`,
+  (label, puffs, battery, eliquid, nicotine) => `Under the hood, ${label} runs on a ${battery} paired with ${eliquid} at ${nicotine}, rated for ${puffs} of consistent flavor from the first draw to the last.`,
+  (label, puffs, battery, eliquid, nicotine) => `Each device ships with ${eliquid} at ${nicotine} and a ${battery}, good for ${puffs} before it's time to reach for another.`,
+]
+const DISPOSABLE_CONVENIENCE = [
+  () => `There's no charging, no refilling, and no buttons — just a draw-activated device that's ready to vape straight out of the box.`,
+  () => `Fully disposable and draw-activated, there's nothing to charge, refill, or configure — just open the box and start vaping right away.`,
+  () => `Once it's empty, simply dispose of it responsibly and grab a new one — no maintenance, no refills, no hassle involved.`,
+]
+const RECHARGEABLE_CONVENIENCE = [
+  (label) => `A rechargeable battery keeps ${label} going well past a typical disposable, so you get far more puffs per device before it's time to recycle it.`,
+  (label) => `Unlike single-use disposables, ${label} is rechargeable via USB-C, extending its lifespan well beyond a standard Breeze disposable vape.`,
+  (label) => `Rechargeable and built to last, ${label} is designed for vapers who want disposable-vape convenience without replacing a device every few days.`,
+]
+const DISPOSABLE_USECASE = [
+  (label, flavor, note) => `Whether you're new to ${label} vapes or restocking a favorite, ${flavor} is an easy pick for vapers who want a ${note} that doesn't fade by the last puff.`,
+  (label, flavor) => `${flavor} works equally well as an everyday vape or as a flavor to keep in rotation alongside other ${label} flavors in your order.`,
+  (label, flavor, note) => `If you're comparing Breeze vape flavors before you order, ${flavor} is a solid starting point for anyone who enjoys a ${note}.`,
+]
+const DISPOSABLE_CLOSING = [
+  (label) => `Order ${label} online today with crypto payment accepted and fast nationwide shipping across the United States.`,
+  (label) => `Shop the full ${label} flavor lineup at Breeze Vapes, with crypto payment and fast nationwide shipping on every order.`,
+]
+
+function buildDisposableDescription({ label, flavor, puffs, battery, eliquid, nicotine, index, rechargeable }) {
+  const note = flavorNote(flavor)
+  const parts = [
+    DISPOSABLE_OPENERS[index % DISPOSABLE_OPENERS.length](label, flavor, note),
+    DISPOSABLE_SPECS[index % DISPOSABLE_SPECS.length](label, puffs, battery, eliquid, nicotine),
+    rechargeable
+      ? RECHARGEABLE_CONVENIENCE[index % RECHARGEABLE_CONVENIENCE.length](label)
+      : DISPOSABLE_CONVENIENCE[index % DISPOSABLE_CONVENIENCE.length](),
+    DISPOSABLE_USECASE[index % DISPOSABLE_USECASE.length](label, flavor, note),
+    DISPOSABLE_CLOSING[index % DISPOSABLE_CLOSING.length](label),
+  ]
+  return ensureMinWords(parts.join(' '), 100, index)
+}
+
+const ELIQUID_OPENERS = [
+  (flavor, note) => `Breeze E-Liquid in ${flavor} brings a ${note} to any pod system or refillable device, made for vapers who want to customize their setup with genuine Breeze vape flavors.`,
+  (flavor, note) => `${flavor} is one of the most popular Breeze E-Liquid flavors, delivering a ${note} in a nicotine salt formula built for smooth, everyday vaping sessions.`,
+  (flavor, note) => `For vapers who already own a device, Breeze E-Liquid in ${flavor} offers a ${note} without committing to a specific disposable vape line.`,
+]
+const ELIQUID_SPECS = [
+  () => `Each 30ml bottle is formulated at 20mg nicotine salt with a balanced 50VG/50PG blend, giving you a smooth throat hit alongside solid vapor production.`,
+  () => `Bottled at 30ml and mixed 50VG/50PG at 20mg nicotine salt, it's engineered for fast nicotine absorption without the harshness of a higher-PG mix.`,
+]
+const ELIQUID_USECASE = [
+  (flavor) => `${flavor} works well in most standard pod systems and refillable devices, making it easy to switch flavors without replacing hardware every time.`,
+  (flavor) => `It's a flavor worth keeping on hand if you rotate between multiple Breeze vape flavors or top off a refillable pod between disposables.`,
+]
+const ELIQUID_EXTRA = 'Breeze E-Liquid is bottled in small batches for consistent flavor and vapor quality from the first fill to the last drop.'
+const ELIQUID_CLOSING = [
+  () => `Shop the full Breeze E-Liquid lineup at Breeze Vapes, with crypto payment accepted and fast nationwide shipping across the United States.`,
+  () => `Order Breeze E-Liquid online today — crypto payment accepted, with fast, discreet shipping nationwide.`,
+]
+
+function buildEliquidDescription(flavor, index) {
+  const note = flavorNote(flavor)
+  const parts = [
+    ELIQUID_OPENERS[index % ELIQUID_OPENERS.length](flavor, note),
+    ELIQUID_SPECS[index % ELIQUID_SPECS.length](),
+    ELIQUID_USECASE[index % ELIQUID_USECASE.length](flavor),
+    ELIQUID_EXTRA,
+    ELIQUID_CLOSING[index % ELIQUID_CLOSING.length](),
+  ]
+  return ensureMinWords(parts.join(' '), 100, index)
+}
+
+function buildBundleDescription({ name, line, count }, index) {
+  const spec = LINE_SPECS[line]
+  const parts = [
+    `The ${name} bundles ${count} ${spec.label} disposable vapes together at a lower per-device price than buying individually, making it an easy way to stock up on Breeze vape flavors without reordering every few weeks.`,
+    `Each device delivers ${spec.puffs} from a ${spec.battery} and ${spec.eliquid} at ${spec.nicotine} strength, so a full ${name.toLowerCase()} adds up to a lot of vaping time across your chosen flavors.`,
+    `Mix and match from the full ${spec.label} flavor lineup and note your picks in the order notes at checkout — every flavor in the ${spec.label} collection is available in this bundle.`,
+    `Order the ${name} online today with crypto payment accepted and fast, discreet nationwide shipping across the United States.`,
+  ]
+  return ensureMinWords(parts.join(' '), 100, index)
+}
+
+// ---- Product generation ---------------------------------------------------
+
+let disposableIndex = 0
 const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, flavors]) => {
   const spec = LINE_SPECS[lineSlug]
-  return flavors.map((flavor) => ({
-    slug: `${lineSlug}-${slugify(flavor)}`,
-    name: `${spec.label} — ${flavor}`,
-    price: spec.price,
-    category: lineSlug,
-    subcategory: '',
-    short: `${spec.label} disposable vape in ${flavor}, ${spec.puffs}.`,
-    description: `${spec.label} in ${flavor} delivers ${spec.puffs} from a ${spec.battery}, with ${spec.eliquid} at ${spec.nicotine}. Draw-activated — no charging or refilling required.`,
-    badge: '',
-    images: [spec.image],
-  }))
+  return flavors.map((flavor) => {
+    const index = disposableIndex++
+    return {
+      slug: `${lineSlug}-${slugify(flavor)}`,
+      name: `${spec.label} — ${flavor}`,
+      price: spec.price,
+      category: lineSlug,
+      subcategory: '',
+      short: `${spec.label} disposable vape in ${flavor}, ${spec.puffs}.`,
+      description: buildDisposableDescription({
+        label: spec.label,
+        flavor,
+        puffs: spec.puffs,
+        battery: spec.battery,
+        eliquid: spec.eliquid,
+        nicotine: spec.nicotine,
+        index,
+        rechargeable: lineSlug === 'breeze-mega',
+      }),
+      badge: '',
+      images: [spec.image],
+    }
+  })
 })
 
 const ELIQUID_FLAVORS = [
@@ -187,33 +327,35 @@ const ELIQUID_FLAVORS = [
   'Honeydew Pineapple', 'Grape', 'Blueberry Mint', 'Cherry Lemon', 'Blueberry Lemon',
 ]
 
-const eliquidProducts = ELIQUID_FLAVORS.map((flavor) => ({
+const eliquidProducts = ELIQUID_FLAVORS.map((flavor, index) => ({
   slug: `e-liquid-${slugify(flavor)}`,
   name: `Breeze E-Liquid — ${flavor}`,
   price: 17.99,
   category: 'e-liquids',
   subcategory: '',
   short: `Breeze nicotine salt e-liquid in ${flavor}, 30ml bottle.`,
-  description: `Breeze E-Liquid in ${flavor} is a 30ml nicotine salt e-liquid at 20mg, blended 50VG/50PG for a smooth throat hit and balanced vapor production. Compatible with standard pod systems and refillable devices.`,
+  description: buildEliquidDescription(flavor, index),
   badge: '',
   images: ['breeze-eliquids-line.svg'],
 }))
 
-const bundleProducts = [
-  { slug: 'breeze-pro-six-pack', name: 'Breeze Pro Six Pack', price: 99.99, desc: 'Six Breeze Pro disposables (2000 puffs each), mixed or matched flavors.' },
-  { slug: 'breeze-elite-six-pack', name: 'Breeze Elite Six Pack', price: 124.99, desc: 'Six Breeze Elite disposables (4000 puffs each), mixed or matched flavors.' },
-  { slug: 'breeze-mega-duo-pack', name: 'Breeze Mega Duo Pack', price: 49.99, desc: 'Two Breeze Mega rechargeable disposables (up to 60,000 puffs each).' },
-  { slug: 'breeze-pro-trio-pack', name: 'Breeze Pro Trio Pack', price: 54.99, desc: 'Three Breeze Pro disposables (2000 puffs each), mixed or matched flavors.' },
-  { slug: 'breeze-prime-trio-pack', name: 'Breeze Prime Trio Pack', price: 74.99, desc: 'Three Breeze Prime disposables (6000 puffs each), mixed or matched flavors.' },
-  { slug: 'breeze-mega-quad-pack', name: 'Breeze Mega Quad Pack', price: 99.99, desc: 'Four Breeze Mega rechargeable disposables (up to 60,000 puffs each).' },
-].map((b) => ({
+const BUNDLE_DEFS = [
+  { slug: 'breeze-pro-six-pack', name: 'Breeze Pro Six Pack', price: 99.99, line: 'breeze-pro', count: 6 },
+  { slug: 'breeze-elite-six-pack', name: 'Breeze Elite Six Pack', price: 124.99, line: 'breeze-elite', count: 6 },
+  { slug: 'breeze-mega-duo-pack', name: 'Breeze Mega Duo Pack', price: 49.99, line: 'breeze-mega', count: 2 },
+  { slug: 'breeze-pro-trio-pack', name: 'Breeze Pro Trio Pack', price: 54.99, line: 'breeze-pro', count: 3 },
+  { slug: 'breeze-prime-trio-pack', name: 'Breeze Prime Trio Pack', price: 74.99, line: 'breeze-prime', count: 3 },
+  { slug: 'breeze-mega-quad-pack', name: 'Breeze Mega Quad Pack', price: 99.99, line: 'breeze-mega', count: 4 },
+]
+
+const bundleProducts = BUNDLE_DEFS.map((b, index) => ({
   slug: b.slug,
   name: b.name,
   price: b.price,
   category: 'bundles',
   subcategory: '',
-  short: b.desc,
-  description: `${b.desc} Bundle pricing saves compared to buying each device individually — mix flavors across the bundle by noting your picks in the order notes.`,
+  short: `${b.count} ${LINE_SPECS[b.line].label} disposables (${LINE_SPECS[b.line].puffs} each), mixed or matched flavors.`,
+  description: buildBundleDescription(b, index),
   badge: 'Bundle',
   images: ['breeze-bundles-line.svg'],
 }))
