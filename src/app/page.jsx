@@ -183,9 +183,9 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="section">
-        <div className="container">
+        <div className="container" style={{ textAlign: 'center' }}>
           <h2>Frequently Asked Questions</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 800 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 800, margin: '0 auto', textAlign: 'left' }}>
             {FAQS.map((f) => (
               <details key={f.q} className="card faq-item" style={{ padding: '1rem 1.25rem' }}>
                 <summary>{f.q}</summary>
