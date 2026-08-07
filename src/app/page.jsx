@@ -105,7 +105,7 @@ export default function HomePage() {
       <section className="section section-tint">
         <div className="container">
           <h2>Shop by Category</h2>
-          <div className="grid grid-4">
+          <div className="grid grid-3">
             {CATEGORIES.map((c) => (
               <Link key={c.slug} href={`/shop/${c.slug}/`} className="card" style={{ padding: '1.5rem', color: 'inherit' }}>
                 <div className="product-frame" style={{ aspectRatio: '1/1', background: 'var(--bg-tint)', marginBottom: '0.75rem' }}>
