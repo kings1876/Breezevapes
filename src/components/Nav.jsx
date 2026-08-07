@@ -127,7 +127,7 @@ export default function Nav() {
       {/* Category nav row */}
       <nav aria-label="Primary" className="nav-desktop" style={{ background: 'var(--bg-tint)', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-          <ul style={{ display: 'flex', gap: '1.75rem', listStyle: 'none', margin: 0, padding: '0.65rem 0' }}>
+          <ul style={{ display: 'flex', justifyContent: 'center', gap: '1.75rem', listStyle: 'none', margin: 0, padding: '0.65rem 0' }}>
             {NAV_ITEMS.map((item) => (
               <li key={item.href} style={{ position: 'relative' }} className={item.mega ? 'has-mega' : ''}>
                 <Link href={item.href} style={{ color: 'var(--dark)', fontWeight: 600, fontSize: '0.9rem' }}>
