@@ -68,8 +68,11 @@ export default function ProductPage({ params }) {
           </p>
           <AddToOrder slug={product.slug} />
           <p style={{ color: 'var(--text-muted)', marginTop: '1.25rem', lineHeight: 1.6 }}>{product.summary}</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
-            {SITE.ageRestriction} and older only. {SITE.complianceStatement}
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
+            Category:{' '}
+            <Link href={`/shop/${category.slug}/`} style={{ fontWeight: 600 }}>
+              {category.name}
+            </Link>
           </p>
           <Link href="/order/" style={{ display: 'inline-block', marginTop: '0.5rem' }}>
             View order →
