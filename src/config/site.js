@@ -346,13 +346,24 @@ function buildBundleSummary({ name, line, count }, index) {
 
 // ---- Product generation ---------------------------------------------------
 
+// Real product photos live in public/images/products/<slug>.jpeg for every
+// product except these four Breeze Pro flavors (no photo supplied yet) —
+// those fall back to the generic per-line placeholder SVG.
+const NO_PHOTO_SLUGS = new Set([
+  'breeze-pro-blue-raspberry',
+  'breeze-pro-mint',
+  'breeze-pro-grape-blackcurrant',
+  'breeze-pro-raspberry-lemon',
+])
+
 let disposableIndex = 0
 const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, flavors]) => {
   const spec = LINE_SPECS[lineSlug]
   return flavors.map((flavor) => {
     const index = disposableIndex++
+    const slug = `${lineSlug}-${slugify(flavor)}`
     return {
-      slug: `${lineSlug}-${slugify(flavor)}`,
+      slug,
       name: `${spec.label} — ${flavor}`,
       price: spec.price,
       category: lineSlug,
@@ -377,7 +388,7 @@ const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, f
         rechargeable: lineSlug === 'breeze-mega',
       }),
       badge: '',
-      images: [spec.image],
+      images: [NO_PHOTO_SLUGS.has(slug) ? spec.image : `products/${slug}.jpeg`],
     }
   })
 })
@@ -397,7 +408,7 @@ const eliquidProducts = ELIQUID_FLAVORS.map((flavor, index) => ({
   summary: buildEliquidSummary(flavor, index),
   description: buildEliquidDescription(flavor, index),
   badge: '',
-  images: ['breeze-eliquids-line.svg'],
+  images: [`products/e-liquid-${slugify(flavor)}.jpeg`],
 }))
 
 const BUNDLE_DEFS = [
@@ -419,7 +430,7 @@ const bundleProducts = BUNDLE_DEFS.map((b, index) => ({
   summary: buildBundleSummary(b, index),
   description: buildBundleDescription(b, index),
   badge: 'Bundle',
-  images: ['breeze-bundles-line.svg'],
+  images: [`products/${b.slug}.jpeg`],
 }))
 
 export const PRODUCTS = [...disposableProducts, ...eliquidProducts, ...bundleProducts]
