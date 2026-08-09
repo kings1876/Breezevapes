@@ -346,16 +346,7 @@ function buildBundleSummary({ name, line, count }, index) {
 
 // ---- Product generation ---------------------------------------------------
 
-// Real product photos live in public/images/products/<slug>.jpeg for every
-// product except these four Breeze Pro flavors (no photo supplied yet) —
-// those fall back to the generic per-line placeholder SVG.
-const NO_PHOTO_SLUGS = new Set([
-  'breeze-pro-blue-raspberry',
-  'breeze-pro-mint',
-  'breeze-pro-grape-blackcurrant',
-  'breeze-pro-raspberry-lemon',
-])
-
+// Real product photos live in public/images/products/<slug>.jpeg for every product.
 let disposableIndex = 0
 const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, flavors]) => {
   const spec = LINE_SPECS[lineSlug]
@@ -388,7 +379,7 @@ const disposableProducts = Object.entries(FLAVORS_BY_LINE).flatMap(([lineSlug, f
         rechargeable: lineSlug === 'breeze-mega',
       }),
       badge: '',
-      images: [NO_PHOTO_SLUGS.has(slug) ? spec.image : `products/${slug}.jpeg`],
+      images: [`products/${slug}.jpeg`],
     }
   })
 })

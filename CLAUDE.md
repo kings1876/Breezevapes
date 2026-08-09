@@ -18,11 +18,10 @@ files directly if Node isn't available (they are also committed, not purely gene
 ## Rules
 - `npm run build` must pass before every push. Run `npm run crosscheck` too when Node is available locally.
 - One `<h1>` per page. Meta descriptions ~150 chars. Titles ≤60.
-- Real product photos live in `public/images/products/<slug>.jpeg`, one per product, referenced from
-  `PRODUCTS[].images` in `src/config/site.js`. 4 Breeze Pro flavors have no photo yet (see `NO_PHOTO_SLUGS`
-  in `site.js`) and fall back to the generic per-line placeholder SVG (`public/images/breeze-*-line.svg`).
-  To add a new product photo, drop the file in `public/images/products/` and remove its slug from
-  `NO_PHOTO_SLUGS`.
+- Real product photos live in `public/images/products/<slug>.jpeg`, one per product (all 81), referenced
+  from `PRODUCTS[].images` in `src/config/site.js`. The generic per-line placeholder SVGs
+  (`public/images/breeze-*-line.svg`) are no longer referenced by any product but are kept in case a future
+  product ships without a photo. To replace a product photo, overwrite its file in `public/images/products/`.
 - Emails entity-encoded (`&#64;` etc.) everywhere, including in visible markup — see `Footer.jsx`.
 - Never commit `node_modules/`, `.next/`, `out/`.
 
@@ -34,9 +33,9 @@ files directly if Node isn't available (they are also committed, not purely gene
   a Contact-page button) until a real ID is set.
 - Product catalog uses real Breeze product-line names, flavor names, puff counts, battery specs, and bottle
   sizes (81 products: Breeze Pro/Prime/Elite/Mega flavors, E-Liquids, Bundles) — this factual data is not
-  copyrightable and was compiled from public product-line specs. 77 of 81 products have real supplied
-  product photos (`public/images/products/`); 4 Breeze Pro flavors still use the generic placeholder SVG.
-  Descriptions/prices are original to this site, not copied from any retailer.
+  copyrightable and was compiled from public product-line specs. All 81 products have real supplied
+  product photos (`public/images/products/`). Descriptions/prices are original to this site, not copied
+  from any retailer.
 
 ## Brand facts (only these are true — never invent more)
 - Founded 2015, United States. Ships nationwide across the United States.
