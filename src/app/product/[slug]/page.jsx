@@ -78,6 +78,7 @@ export default function ProductPage({ params }) {
       </div>
 
       <div style={{ marginTop: '2rem' }}>
+        <h2>Product Description</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.description}</p>
       </div>
 
