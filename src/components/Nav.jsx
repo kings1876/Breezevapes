@@ -6,7 +6,7 @@ import { SITE, CATEGORIES, PRODUCTS } from '@/config/site'
 import { getCart, cartCount } from '@/lib/cart'
 
 const NAV_ITEMS = [
-  { label: 'Shop', href: '/shop/', mega: true },
+  ...CATEGORIES.map((c) => ({ label: c.name, href: `/shop/${c.slug}/` })),
   { label: 'Blog', href: '/blog/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
@@ -127,21 +127,12 @@ export default function Nav() {
       {/* Category nav row */}
       <nav aria-label="Primary" className="nav-desktop" style={{ background: 'var(--bg-tint)', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-          <ul style={{ display: 'flex', justifyContent: 'center', gap: '1.75rem', listStyle: 'none', margin: 0, padding: '0.65rem 0' }}>
+          <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.25rem', listStyle: 'none', margin: 0, padding: '0.65rem 0' }}>
             {NAV_ITEMS.map((item) => (
-              <li key={item.href} style={{ position: 'relative' }} className={item.mega ? 'has-mega' : ''}>
+              <li key={item.href}>
                 <Link href={item.href} style={{ color: 'var(--dark)', fontWeight: 600, fontSize: '0.9rem' }}>
                   {item.label}
                 </Link>
-                {item.mega && (
-                  <div className="mega-dropdown">
-                    {CATEGORIES.map((c) => (
-                      <Link key={c.slug} href={`/shop/${c.slug}/`}>
-                        {c.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
               </li>
             ))}
           </ul>
@@ -169,21 +160,6 @@ export default function Nav() {
                 <Link href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '0.75rem 0.25rem', color: 'var(--dark)', fontWeight: 600, minHeight: 44 }}>
                   {item.label}
                 </Link>
-                {item.mega && (
-                  <ul style={{ listStyle: 'none', margin: '0 0 0.5rem', padding: '0 0 0 1rem', display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
-                    {CATEGORIES.map((c) => (
-                      <li key={c.slug}>
-                        <Link
-                          href={`/shop/${c.slug}/`}
-                          onClick={() => setMobileOpen(false)}
-                          style={{ display: 'block', padding: '0.5rem 0.25rem', color: 'var(--text-muted)', minHeight: 44 }}
-                        >
-                          {c.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
           </ul>
@@ -196,24 +172,6 @@ export default function Nav() {
           .nav-desktop { display: block; }
           .hamburger { display: none !important; }
         }
-        .has-mega .mega-dropdown {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background: #fff;
-          border: 1px solid var(--border);
-          border-radius: 10px;
-          box-shadow: var(--shadow);
-          padding: 0.5rem;
-          min-width: 200px;
-          flex-direction: column;
-          z-index: 50;
-        }
-        .has-mega:hover .mega-dropdown { display: flex; }
-        .mega-dropdown a { padding: 0.5rem 0.75rem; border-radius: 8px; color: var(--dark); }
-        .mega-dropdown a:hover { background: var(--bg-tint); text-decoration: none; }
-
         .nav-icon-btn {
           display: flex;
           width: 44px;
