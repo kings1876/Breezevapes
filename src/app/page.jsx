@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SmartImage from '@/components/SmartImage'
 import ProductCard from '@/components/ProductCard'
 import { SITE, CATEGORIES, PRODUCTS, FAQS, POSTS, ORDER_RULES, FEATURED_SLUGS } from '@/config/site'
 
@@ -108,10 +109,8 @@ export default function HomePage() {
           <div className="grid grid-3">
             {CATEGORIES.map((c) => (
               <Link key={c.slug} href={`/shop/${c.slug}/`} className="card" style={{ padding: '1.5rem', color: 'inherit' }}>
-                <div className="product-frame" style={{ aspectRatio: '1/1', background: 'var(--bg-tint)', marginBottom: '0.75rem' }}>
-                  <span aria-hidden="true" style={{ fontSize: '2.5rem' }}>
-                    {{ 'breeze-pro': '💨', 'breeze-prime': '🌬️', 'breeze-elite': '⚡', 'breeze-mega': '🔋', 'e-liquids': '🧪', bundles: '🎁' }[c.slug]}
-                  </span>
+                <div className="product-frame" style={{ aspectRatio: '1/1', marginBottom: '0.75rem' }}>
+                  <SmartImage src={`/images/${c.image}`} alt={c.name} width={800} height={800} loading="lazy" style={{ objectFit: 'cover' }} />
                 </div>
                 <h3 style={{ fontSize: '1.05rem' }}>{c.name}</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0 }}>{c.description}</p>

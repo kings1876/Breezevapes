@@ -59,36 +59,42 @@ export const CATEGORIES = [
     name: 'Breeze Pro',
     description: 'Breeze Pro disposable vapes — 2000 puffs, 1000mAh battery, 6mL pre-filled e-liquid, 20mg nicotine salt.',
     subcategories: [],
+    image: 'categories/breeze-pro.jpeg',
   },
   {
     slug: 'breeze-prime',
     name: 'Breeze Prime',
     description: 'Breeze Prime disposable vapes — 6000 puffs, 1500mAh battery, 10mL pre-filled e-liquid, 20mg nicotine salt.',
     subcategories: [],
+    image: 'categories/breeze-prime.jpeg',
   },
   {
     slug: 'breeze-elite',
     name: 'Breeze Elite',
     description: 'Breeze Elite disposable vapes — 4000 puffs, 1200mAh battery, 6mL pre-filled e-liquid, 20mg nicotine salt.',
     subcategories: [],
+    image: 'categories/breeze-elite.jpeg',
   },
   {
     slug: 'breeze-mega',
     name: 'Breeze Mega',
     description: 'Breeze Mega rechargeable disposables — up to 60,000 puffs, 850mAh rechargeable battery, 20mg nicotine salt.',
     subcategories: [],
+    image: 'categories/breeze-mega.jpeg',
   },
   {
     slug: 'e-liquids',
     name: 'E-Liquids',
     description: 'Breeze nicotine salt e-liquids — 30ml bottles, 20mg, 50VG/50PG blend.',
     subcategories: [],
+    image: 'categories/e-liquids.jpeg',
   },
   {
     slug: 'bundles',
     name: 'Bundles',
     description: 'Multi-packs across the Breeze Pro, Prime, Elite, and Mega lineup at a bundle price.',
     subcategories: [],
+    image: 'categories/bundles.jpeg',
   },
 ]
 

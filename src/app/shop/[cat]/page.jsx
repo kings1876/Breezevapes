@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import SmartImage from '@/components/SmartImage'
 import ProductCard from '@/components/ProductCard'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { SITE, CATEGORIES, PRODUCTS } from '@/config/site'
@@ -26,6 +27,11 @@ export default function CategoryPage({ params }) {
   return (
     <div className="container section">
       <Breadcrumbs items={[{ label: 'Shop', href: '/shop/' }, { label: cat.name, href: `/shop/${cat.slug}/` }]} />
+
+      <div className="card" style={{ aspectRatio: '21/6', overflow: 'hidden', marginBottom: '1.5rem' }}>
+        <SmartImage src={`/images/${cat.image}`} alt={cat.name} width={1600} height={460} loading="eager" style={{ objectFit: 'cover' }} />
+      </div>
+
       <h1>{cat.name}</h1>
       <p style={{ maxWidth: 640, color: 'var(--text-muted)' }}>{cat.description}</p>
 
