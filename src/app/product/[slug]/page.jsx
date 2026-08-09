@@ -61,7 +61,8 @@ export default function ProductPage({ params }) {
 
         <div>
           {product.badge && <span className="badge">{product.badge}</span>}
-          <p className="price" style={{ fontSize: '1.4rem', marginTop: '0.5rem' }}>
+          <h1 style={{ marginTop: '0.25rem' }}>{product.name}</h1>
+          <p className="price" style={{ fontSize: '1.4rem' }}>
             {SITE.currencySymbol}
             {product.price.toFixed(2)}
           </p>
@@ -77,7 +78,6 @@ export default function ProductPage({ params }) {
       </div>
 
       <div style={{ marginTop: '2rem' }}>
-        <h1>{product.name}</h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.description}</p>
       </div>
 
