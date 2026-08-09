@@ -5,13 +5,7 @@ import Link from 'next/link'
 import { SITE, CATEGORIES, PRODUCTS } from '@/config/site'
 import { getCart, cartCount } from '@/lib/cart'
 
-const NAV_ITEMS = [
-  ...CATEGORIES.map((c) => ({ label: c.name, href: `/shop/${c.slug}/` })),
-  { label: 'Blog', href: '/blog/' },
-  { label: 'About', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
-  { label: 'FAQ', href: '/faq/' },
-]
+const NAV_ITEMS = CATEGORIES.map((c) => ({ label: c.name, href: `/shop/${c.slug}/` }))
 
 function cartTotal(items) {
   return items.reduce((sum, i) => {
