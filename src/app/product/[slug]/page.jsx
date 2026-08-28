@@ -34,6 +34,7 @@ export default function ProductPage({ params }) {
     name: product.name,
     description: product.description,
     image: product.images.map((img) => `${SITE.url}/images/${img}`),
+    sku: product.slug,
     brand: { '@type': 'Brand', name: SITE.name },
     offers: {
       '@type': 'Offer',

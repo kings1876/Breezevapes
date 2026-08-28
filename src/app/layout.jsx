@@ -35,7 +35,13 @@ export default function RootLayout({ children }) {
     address: { '@type': 'PostalAddress', addressCountry: 'US' },
     areaServed: SITE.areaServed,
     priceRange: '$$',
-    knowsAbout: ['Disposable vapes', 'Pod systems', 'E-liquids', 'Vape accessories'],
+    knowsAbout: ['Breeze Pro', 'Breeze Prime', 'Breeze Elite', 'Breeze Mega', 'Nicotine e-liquids', 'Disposable vapes'],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: SITE.contactEmail,
+      contactType: 'customer service',
+      areaServed: 'US',
+    },
   }
 
   return (

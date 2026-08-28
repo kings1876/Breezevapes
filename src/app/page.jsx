@@ -4,8 +4,9 @@ import ProductCard from '@/components/ProductCard'
 import { SITE, CATEGORIES, PRODUCTS, FAQS, POSTS, ORDER_RULES, FEATURED_SLUGS } from '@/config/site'
 
 export const metadata = {
-  title: `${SITE.name} — Breeze Pro, Prime, Elite & Mega Disposable Vapes`,
-  description: `Shop the full Breeze vape lineup — Pro, Prime, Elite, Mega disposables, e-liquids, and bundles. Nationwide US shipping, crypto payment accepted, ${ORDER_RULES.cryptoDiscountPercent}% off with crypto.`,
+  title: 'Buy Breeze Disposable Vapes Online | Pro, Prime, Elite & Mega',
+  description:
+    'Shop Breeze Pro, Prime, Elite & Mega disposable vapes online. Fast nationwide shipping, discreet packaging, crypto accepted for 10% off. 21+ only.',
   alternates: { canonical: `${SITE.url}/` },
   openGraph: { url: `${SITE.url}/`, updatedTime: new Date().toISOString() },
 }
@@ -56,7 +57,7 @@ export default function HomePage() {
             <span className="badge" style={{ marginBottom: '1rem', display: 'inline-block' }}>
               Now shipping nationwide
             </span>
-            <h1 style={{ color: '#fff' }}>Breeze Vape — Pro, Prime, Elite &amp; Mega, Delivered Fast</h1>
+            <h1 style={{ color: '#fff' }}>Shop the Full Breeze Vape Lineup — Fast, Discreet Shipping</h1>
             <p style={{ color: '#cfe0f2', fontSize: '1.1rem', maxWidth: 520 }}>
               {SITE.name} is a {SITE.foundingLocation}-based vape shop established in {SITE.foundingYear}, offering the
               full Breeze Pro, Prime, Elite, and Mega disposable lineup plus Breeze e-liquids and bundles. We ship{' '}
