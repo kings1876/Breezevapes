@@ -81,9 +81,25 @@ export default function ProductPage({ params }) {
         </div>
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
+      <div style={{ marginTop: '2rem', maxWidth: 820 }}>
         <h2>Product Description</h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.description}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.details.intro}</p>
+
+        <h3 style={{ fontSize: '1.15rem', marginTop: '1.5rem' }}>Key Features</h3>
+        <ul style={{ margin: 0, paddingLeft: '1.4rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {product.details.features.map((feature) => {
+            const [label, ...rest] = feature.split(':')
+            return (
+              <li key={feature} style={{ color: 'var(--text-muted)', fontSize: '1.02rem', lineHeight: 1.5 }}>
+                <strong style={{ color: 'var(--dark)' }}>{label}:</strong>
+                {rest.join(':')}
+              </li>
+            )
+          })}
+        </ul>
+
+        <h3 style={{ fontSize: '1.15rem', marginTop: '1.5rem' }}>{product.details.closingHeading}</h3>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: 1.7 }}>{product.details.closingText}</p>
       </div>
 
       {related.length > 0 && (
